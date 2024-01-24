@@ -1,0 +1,51 @@
+{% include 'header.twig' %}
+
+
+{#<ul>#}
+{#    {% for user in users %}#}
+{#       {{ user.username }}#}
+{#    {% endfor %}#}
+{#</ul>#}
+
+{#{% for user in users %}#}
+{#<td>{{ user }}<td>#}
+{#    {% endfor %}#}
+<h1>Albums</h1>
+<h3>Search form</h3>
+
+<form method="post">
+    <input type="text" name="q" aria-label="Search query" value="{{query}}">
+    <button>Search</button>
+</form>
+
+<div class="albums">
+    {% for record in records %}
+    <div>
+        <h2>{{ record.title|e }}</h2>
+        <p>{{ record.artist|e }}</p>
+    </div>
+    {% endfor %}
+</div>
+{#<ul>#}
+{#    {% for record in records %}#}
+{#        <li><p>{{ record.id|e }} {{ record.title|e }} {{ record.artist|e }}</p></li>#}
+
+{#    {% endfor %}#}
+{#</ul>#}
+
+
+
+{#<h1>Hi {{ users }}!</h1>#}
+{#{% for message in flash.getMessage('errors') %}#}
+{#    <div class="box" role="alert">#}
+{#        <h1>   {{ message }}  </h1>#}
+{#    </div>#}
+{#{% endfor %}#}
+
+{#<ul>#}
+{#    {% for user in users %}#}
+{#        <li>{{ user }}</li>#}
+{#    {% endfor %}#}
+{#</ul>#}
+
+{% include 'footer.twig' %}

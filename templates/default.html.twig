@@ -1,0 +1,15 @@
+{% include 'headerbikes.twig' %}
+
+<h1>Bikes</h1>
+
+<div class="bikes">
+    {% for bike in bikes %}
+    <div>
+        <span>🚲</span>
+        <h2><a href="/details/{{bike.id}}">{{bike.name}}</a></h2>
+        <p>{{bike.type}}</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% include 'footer.twig' %}

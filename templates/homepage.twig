@@ -1,0 +1,15 @@
+{% include 'header.twig' %}
+
+<h1>Hello {{ name }} !</h1>
+<p>Welcome to my homepage. Thanks for visiting!</p>
+
+
+<p>Message for you sire: {{ message }} !</p>
+
+{% for message in flash.getMessage('errors') %}
+    <div class="box" role="alert">
+        <h1>   {{ message }}  </h1>
+    </div>
+{% endfor %}
+
+{% include 'footer.twig' %}

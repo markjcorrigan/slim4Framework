@@ -1,0 +1,38 @@
+{% include 'header.twig' %}
+
+
+<p>Welcome to my homepage. Thanks for visiting!</p>
+
+<h1>Users</h1>
+{#<ul>#}
+{#    {% for user in users %}#}
+{#       {{ user.username }}#}
+{#    {% endfor %}#}
+{#</ul>#}
+
+{#{% for user in users %}#}
+{#<td>{{ user }}<td>#}
+{#    {% endfor %}#}
+
+<ul>
+    {% for user in users %}
+        <li>{{ user.id|e }} {{ user.username|e }}</li>
+    {% endfor %}
+</ul>
+
+
+
+{#<h1>Hi {{ users }}!</h1>#}
+{% for message in flash.getMessage('errors') %}
+    <div class="box" role="alert">
+        <h1>   {{ message }}  </h1>
+    </div>
+{% endfor %}
+
+{#<ul>#}
+{#    {% for user in users %}#}
+{#        <li>{{ user }}</li>#}
+{#    {% endfor %}#}
+{#</ul>#}
+
+{% include 'footer.twig' %}

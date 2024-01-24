@@ -1,0 +1,39 @@
+Hi there.
+
+I was fiddling with Chris's course and converted up to lesson 5 into Slim 4 Framework.
+I simply downloaded the Slim 4 Framework and started coding using the MVC approach.
+The routes should give you an idea of what is what.
+Also I used Twigg as the templating engine.
+
+I used mysql and created a database called slim app.  
+The sql dump of the tables is in this folder.
+I only use "users", "bikes" and "records".  You can ignore the other tables.
+Go to config/settings and add in your own mysql name and password.
+
+The routes below should all work.
+    $app->get('/', HomeAction::class)->setName('home');
+
+    $app->get('/helloworld', HelloAction::class)->setName('hello'); //Lesson one
+
+    $app->get('/hi/{nameholder}', HiAction::class); //Lesson two
+
+    $app->get('/hello/{name}', ParamsAction::class)->setName('params'); //Lesson two
+
+    $app->get('/first', 'App\Controller\FirstController:homepage');
+
+    $app->get('/second', 'App\Controller\SecondController:second');
+
+    $app->get('/loop', 'App\Controller\LoopController:loop');
+
+    $app->any('/home', 'App\Controller\SearchController:records');
+
+    $app->any('/search', '\App\Controller\SearchController:search');
+
+    $app->any('/form', '\App\Controller\SearchController:form');
+
+    $app->any('/default', '\App\Controller\ShopController:default');
+
+    $app->get('/details/{id:[0-9]+}', '\App\Controller\ShopController:details');
+
+I did struggle with the error handling as I am unable to get this to work using the course code.
+Possibly Chris can help.

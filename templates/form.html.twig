@@ -1,0 +1,19 @@
+{% include 'header.twig' %}
+
+<h1>Search form</h1>
+
+<form method="post">
+    <input type="text" name="q" aria-label="Search query" value="{{query}}">
+    <button>Search</button>
+</form>
+
+<div class="albums">
+    {% for record in records %}
+    <div>
+        <h2>{{ record.title|e }}</h2>
+        <p>{{ record.artist|e }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% include 'footer.twig' %}
