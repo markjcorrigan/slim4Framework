@@ -11,6 +11,9 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Response;
+use Odan\Session\PhpSession;
+use Odan\Session\SessionInterface;
+use Odan\Session\SessionManagerInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
@@ -31,6 +34,7 @@ use Slim\Views\PhpRenderer;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 use App\Controller\NotFoundController;
+
 
 return [
 
@@ -122,6 +126,16 @@ return [
         return $logger;
     },
 
+    SessionManagerInterface::class => function (ContainerInterface $container) {
+        return $container->get(SessionInterface::class);
+    },
+
+    SessionInterface::class => function (ContainerInterface $container) {
+        $options = $container->get('settings')['session'];
+
+        return new PhpSession($options);
+    },
+
     // Twig templates
     Twig::class => function (ContainerInterface $container) {
         $settings = $container->get('settings');
@@ -150,7 +164,6 @@ return [
         $storage = [];
         return new Messages($storage);
     },
-
 
 
 //    ErrorMiddleware::class => function (ContainerInterface $container) {
@@ -203,7 +216,7 @@ return [
             //                return $response->withStatus(404);
                 return $response
                     ->withHeader('Location', '/notfound')
-                    ->withStatus(404);
+                    ->withStatus(302);
             }
         );
         return $errorMiddleware;

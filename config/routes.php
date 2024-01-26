@@ -10,9 +10,11 @@ use App\Action\HiAction;
 use App\Action\Home\HomeAction;
 use App\Controller\FirstController;
 use App\Controller\LoopController;
+use App\Middleware\UserAuthMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
+use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app) {
     $app->get('/', HomeAction::class)->setName('home');
@@ -29,7 +31,7 @@ return function (App $app) {
 
     $app->get('/loop', 'App\Controller\LoopController:loop');
 
-    $app->any('/home', 'App\Controller\SearchController:records');
+    $app->any('/home', 'App\Controller\SearchController:records')->add(UserAuthMiddleware::class);
 
     $app->any('/search', '\App\Controller\SearchController:search');
 
@@ -42,4 +44,13 @@ return function (App $app) {
     $app->get('/notfound', 'App\Controller\NotFoundController:notfound');
 
 
+    $app->group('/users', function (RouteCollectorProxy $group) {
+        $group->get('/', \App\Action\User\UserAction::class)->setName('users');
+
+        // add more routes ...
+    })->add(UserAuthMiddleware::class);
+    $app->get('/users', \App\Action\User\UserAction::class)->setName('users');
+    $app->get('/login', \App\Action\Auth\LoginAction::class)->setName('login');
+    $app->post('/login', \App\Action\Auth\LoginSubmitAction::class);
+    $app->get('/logout', \App\Action\Auth\LogoutAction::class)->setName('logout');
 };

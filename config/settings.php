@@ -18,8 +18,8 @@ $settings['db'] = [
     'driver' => 'pdo_mysql',
     'host' => 'localhost',
     'dbname' => 'slimapp',
-    'user' => 'putinyourownmysqlusernamehere',
-    'password' => 'putinyourownmysqlpasswordhere',
+    'user' => 'YOURMYSQLUSERNAME',
+    'password' => 'YOURMYSQLPASSWORD',
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'driverOptions' => [
@@ -34,6 +34,11 @@ $settings['db'] = [
         // Set character set
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci'
     ],
+];
+
+// Session
+$settings['session'] = [
+    'name' => 'webapp',
 ];
 
 // Logger settings
