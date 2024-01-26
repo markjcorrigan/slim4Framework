@@ -22,7 +22,8 @@
         "slim/flash": "^0.4.0",
         "slim/php-view": "^3.2",
         "slim/slim": "^4",
-        "slim/twig-view": "^3.3"
+        "slim/twig-view": "^3.3",
+        "ext-http": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3",

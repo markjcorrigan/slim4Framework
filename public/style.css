@@ -51,3 +51,11 @@ form input {
     padding: 12px;
     text-align: center;
 }
+
+.box {
+    height: 100px;
+    width: 900px;
+    background-color: red;
+    padding: 20px 20px 20px 20px;
+}
+

@@ -15,15 +15,9 @@ return function (App $app) {
     $app->addRoutingMiddleware();
     $app->add(BasePathMiddleware::class);
     $app->add(ExceptionMiddleware::class);
- //   $app->add(ErrorHandlerMiddleware::class);
+    $app->add(ErrorHandlerMiddleware::class);
     $app->add(ErrorMiddleware::class);
     $app->addErrorMiddleware(true, true, true);
 
-//    $app->addErrorMiddleware(true, true, true)->setErrorHandler(
-//        Slim\Exception\HttpNotFoundException::class,
-//        function (Psr\Http\Message\ServerRequestInterface $request) use ($container) {
-//            $controller = new App\Controller\ExceptionController($container);
-//            return $controller->notFound($request);
-//        }
-//    );
+
 };

@@ -18,8 +18,8 @@ $settings['db'] = [
     'driver' => 'pdo_mysql',
     'host' => 'localhost',
     'dbname' => 'slimapp',
-    'user' => 'yourmysqlname',
-    'password' => 'yourmysqlpassword',
+    'user' => 'yourusernamehere',
+    'password' => 'youruserpasswordhere',
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'driverOptions' => [
@@ -34,6 +34,14 @@ $settings['db'] = [
         // Set character set
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci'
     ],
+];
+
+// Logger settings
+$settings['logger'] = [
+    // Log file location
+    'path' => __DIR__ . '/../logs',
+    // Default log level
+    'level' => \Psr\Log\LogLevel::DEBUG,
 ];
 
 $settings['view'] = [

@@ -1,4 +1,6 @@
 .idea/
+
+
 nbproject/
 composer.phar
 composer.lock
@@ -20,6 +22,8 @@ package-lock.json
 *.crt
 *.cer
 *.der
+
+*.docx
 
 vendor/
 build/

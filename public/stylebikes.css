@@ -40,3 +40,10 @@ header span {
     font-size: 1000%;
     margin: 0;
 }
+
+.box {
+    height: 100px;
+    width: 900px;
+    background-color: red;
+    padding: 20px 20px 20px 20px;
+}

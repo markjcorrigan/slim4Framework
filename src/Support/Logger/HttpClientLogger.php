@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Logger;
+namespace App\Support\Logger;
 
 use Monolog\Logger;
 
