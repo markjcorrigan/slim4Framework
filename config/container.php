@@ -1,5 +1,6 @@
 <?php
 
+use App\Error\Renderer\HtmlErrorRenderer;
 use App\Support\Logger\LoggerFactory;
 use App\Support\Logger\LoggerFactoryInterface;
 use Doctrine\DBAL\Configuration as DoctrineConfiguration;
@@ -9,6 +10,7 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 use Nyholm\Psr7\Factory\Psr17Factory;
+use Nyholm\Psr7\Response;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
@@ -19,6 +21,7 @@ use Psr\Http\Message\UriFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Selective\BasePath\BasePathMiddleware;
 use Slim\App;
+use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
@@ -27,6 +30,7 @@ use Slim\Middleware\MethodOverrideMiddleware;
 use Slim\Views\PhpRenderer;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
+use App\Controller\NotFoundController;
 
 return [
 
@@ -147,6 +151,25 @@ return [
         return new Messages($storage);
     },
 
+
+
+//    ErrorMiddleware::class => function (ContainerInterface $container) {
+//        $app = $container->get(App::class);
+//        $settings = $container->get('settings')['error'];
+//
+//        $logger = $container->get(LoggerFactoryInterface::class)
+//            ->addFile('error.log')
+//            ->createLogger();
+//
+//        $errorMiddleware = new ErrorMiddleware(
+//            $app->getCallableResolver(),
+//            $app->getResponseFactory(),
+//            (bool)$settings['display_error_details'],
+//            (bool)$settings['log_errors'],
+//            (bool)$settings['log_error_details'],
+//            $logger
+//        );
+
     ErrorMiddleware::class => function (ContainerInterface $container) {
         $app = $container->get(App::class);
         $settings = $container->get('settings')['error'];
@@ -169,13 +192,21 @@ return [
             function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
                 $response = new Response();
                 $response->getBody()->write('500 Internal Server Error');
-
                 return $response->withStatus(500);
             }
         );
-
+        $errorMiddleware->setErrorHandler(
+            HttpNotFoundException::class,
+            function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
+                $response = new Response();
+            //                $response->getBody()->write('404 Not Found From the message in container.php');
+            //                return $response->withStatus(404);
+                return $response
+                    ->withHeader('Location', '/notfound')
+                    ->withStatus(404);
+            }
+        );
         return $errorMiddleware;
     },
-
 
 ];

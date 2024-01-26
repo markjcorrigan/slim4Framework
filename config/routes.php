@@ -39,5 +39,7 @@ return function (App $app) {
 
     $app->get('/details/{id:[0-9]+}', '\App\Controller\ShopController:details');
 
+    $app->get('/notfound', 'App\Controller\NotFoundController:notfound');
+
 
 };

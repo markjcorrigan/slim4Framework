@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Flash\Messages;
 use Slim\Views\Twig;
 
-class FirstController
+class NotFoundController
 {
 
     private Twig $twig;
@@ -22,7 +22,7 @@ class FirstController
     }
 
 
-    public function homepage(Request $request, Response $response): Response
+    public function notfound(Request $request, Response $response): Response
     {
 //        trigger_error('Test error message', E_USER_ERROR);
         //session_start();
@@ -38,6 +38,6 @@ class FirstController
 //            'errors' => $this->flash,
         ];
 
-        return $this->twig->render($response, 'homepage.twig', $data);
+        return $this->twig->render($response, 'not-found.html.twig', $data);
     }
 }

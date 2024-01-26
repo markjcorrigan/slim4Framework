@@ -48,7 +48,8 @@ class ShopController extends Controller
 
 
         if ($key === false) {
-            throw new HttpNotFoundException($request, $response);
+            throw new HttpNotFoundException($request);
+//            return $this->twig->render($response, 'not-found.html.twig');
         }
 
 //        return $this->twig->render($response, 'details.html.twig', $viewData);
