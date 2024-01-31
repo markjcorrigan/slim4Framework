@@ -17,11 +17,14 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app) {
+
+      $app->get('/hi/{name}', \App\Controller\HiController::class);
+
     $app->get('/', HomeAction::class)->setName('home');
 
     $app->get('/helloworld', HelloAction::class)->setName('hello'); //Lesson one
 
-    $app->get('/hi/{nameholder}', HiAction::class); //Lesson two
+//    $app->get('/hi/{nameholder}', HiAction::class); //Lesson two
 
     $app->get('/hello/{name}', ParamsAction::class)->setName('params'); //Lesson two
 

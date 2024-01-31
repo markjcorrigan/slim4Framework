@@ -1,0 +1,19 @@
+<h1>Hello {{ name }}!</h1>
+<p>You have {{ notifications|length }} new notification(s).</p>
+
+<p>The message is: {{ notifications.messagetwo }}</p>
+
+<p>Tasks for today:</p>
+<ul>
+    {% for task in tasks %}
+        <p>{{ task.title }} </p>
+    {% endfor %}
+</ul>
+
+
+
+
+
+
+
+
