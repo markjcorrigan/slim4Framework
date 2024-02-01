@@ -6,6 +6,7 @@ use App\Support\Logger\LoggerFactoryInterface;
 use Doctrine\DBAL\Configuration as DoctrineConfiguration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
+use Intervention\Image\ImageManager;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
@@ -116,6 +117,10 @@ return [
         return new HttpBasicAuthentication($container->get('settings')['api_auth']);
     },
 
+
+    ImageManager::class => function (ContainerInterface $container) {
+        return new ImageManager($container->get('settings')['image_manager']);
+    },
 
 
     LoggerInterface::class => function (ContainerInterface $container) {

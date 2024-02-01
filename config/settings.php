@@ -42,6 +42,11 @@ $settings['session'] = [
     'name' => 'webapp',
 ];
 
+$settings['image_manager'] = [
+    // configure image driver (gd by default)
+    'driver' => 'gd',
+];
+
 // Logger settings
 $settings['logger'] = [
     // Log file location

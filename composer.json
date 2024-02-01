@@ -16,6 +16,7 @@
         "ext-pdo": "*",
         "doctrine/dbal": "^3.7",
         "fig/http-message-util": "^1.1",
+        "intervention/image": "^3.3",
         "monolog/monolog": "^3.5",
         "nyholm/psr7": "^1.8.1",
         "nyholm/psr7-server": "^1.1",

@@ -18,7 +18,7 @@ use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app) {
 
-      $app->get('/hi/{name}', \App\Controller\HiController::class);
+      $app->get('/hi/{name}', \App\Controller\HiController::class);  //loop data from Tasks.php class and shows and image as well
 
     $app->get('/', HomeAction::class)->setName('home');
 
