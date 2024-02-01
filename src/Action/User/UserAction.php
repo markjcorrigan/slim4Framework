@@ -21,7 +21,7 @@ final class UserAction
     ): ResponseInterface {
         $username = $this->session->get('user');
 
-        $response->getBody()->write(sprintf('Welcome %s', $username));
+        $response->getBody()->write(sprintf('Welcome in %s', $username));
 
         return $response;
     }

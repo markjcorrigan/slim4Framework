@@ -34,9 +34,9 @@ return function (App $app) {
 
     $app->get('/loop', 'App\Controller\LoopController:loop');
 
-    $app->any('/home', 'App\Controller\SearchController:records')->add(UserAuthMiddleware::class);
+    $app->any('/home', 'App\Controller\SearchController:records')->add(UserAuthMiddleware::class);  //admin secret to get access to this route or below one.  Logout deletes the cookies
 
-    $app->any('/search', '\App\Controller\SearchController:search');
+    $app->any('/search', '\App\Controller\SearchController:search')->add(UserAuthMiddleware::class);
 
     $app->any('/form', '\App\Controller\SearchController:form');
 
