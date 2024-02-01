@@ -56,6 +56,20 @@ $settings['view'] = [
     'attributes' => [],
 ];
 
+//$settings['api_auth'] = [
+//    'users' => [
+//        'admin' => 'secret',
+//        'user' => 'password',
+//    ],
+//];
+/// Below is above encrypted and should be pulled from .env.  Not got there yet
+$settings['api_auth'] = [
+    'users' => [
+        'admin' => '$2y$10$JKLleIlqaHs1HVbRAE2G3.sOmLMbxWHBu6dnd8iQ3BFvhw9wE1S9m',
+        'user' => '$2y$10$BAcmFwDluG.7eKcVbpcl.uEdBa6MWQkJp2NPufgn7ScU6aR2CrOBC',
+    ],
+];
+
 // Error Handling Middleware settings
 $settings['error'] = [
 

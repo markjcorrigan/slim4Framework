@@ -33,6 +33,7 @@ use Slim\Middleware\MethodOverrideMiddleware;
 use Slim\Views\PhpRenderer;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
+use Tuupola\Middleware\HttpBasicAuthentication;
 use App\Controller\NotFoundController;
 
 
@@ -109,6 +110,10 @@ return [
 
     LoggerFactoryInterface::class => function (ContainerInterface $container) {
         return new LoggerFactory($container->get('settings')['logger']);
+    },
+
+    HttpBasicAuthentication::class => function (ContainerInterface $container) {
+        return new HttpBasicAuthentication($container->get('settings')['api_auth']);
     },
 
 

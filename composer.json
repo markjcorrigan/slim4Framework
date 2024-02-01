@@ -26,6 +26,7 @@
         "slim/php-view": "^3.2",
         "slim/slim": "^4",
         "slim/twig-view": "^3.3",
+        "tuupola/slim-basic-auth": "^3.3",
         "zeuxisoo/slim-whoops": "^0.7.3"
     },
     "require-dev": {

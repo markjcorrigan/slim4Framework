@@ -1,21 +1,45 @@
-Hi there.
 
-I was fiddling with Chris's course and converted up to lesson 5 into Slim 4 Framework.
-I simply downloaded the Slim 4 Framework and started coding using the MVC approach.
-The routes should give you an idea of what is what.
+Hi there (and Chris).
+
+I was fiddling with Chris's course and converted most of the projects into Slim 4 Framework.
+I simply downloaded the Slim 4 skeleton and started coding using the MVC approach with controllers.
+The routes should give you an idea of what is what and how the Slim 3 needed to be upgraded to work on Slim 4.
 Also I used Twigg as the templating engine.
 
-I used mysql and created a database called slim app.  
+I used mysql and created a database called slim app.
 The sql dump of the tables is in this folder.
 I only use "users", "bikes" and "records".  You can ignore the other tables.
 Go to config/settings and add in your own mysql name and password.
 
 The routes below should all work.
+
+<?php
+
+// Define app routes
+
+
+use App\Action\escapeAction;
+use App\Action\Hello\HelloAction;
+use App\Action\Hello\ParamsAction;
+use App\Action\HiAction;
+use App\Action\Home\HomeAction;
+use App\Controller\FirstController;
+use App\Controller\LoopController;
+use App\Middleware\UserAuthMiddleware;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\App;
+use Slim\Routing\RouteCollectorProxy;
+
+return function (App $app) {
+
+      $app->get('/hi/{name}', \App\Controller\HiController::class);
+
     $app->get('/', HomeAction::class)->setName('home');
 
     $app->get('/helloworld', HelloAction::class)->setName('hello'); //Lesson one
 
-    $app->get('/hi/{nameholder}', HiAction::class); //Lesson two
+//    $app->get('/hi/{nameholder}', HiAction::class); //Lesson two
 
     $app->get('/hello/{name}', ParamsAction::class)->setName('params'); //Lesson two
 
@@ -25,7 +49,7 @@ The routes below should all work.
 
     $app->get('/loop', 'App\Controller\LoopController:loop');
 
-    $app->any('/home', 'App\Controller\SearchController:records');
+    $app->any('/home', 'App\Controller\SearchController:records')->add(UserAuthMiddleware::class);
 
     $app->any('/search', '\App\Controller\SearchController:search');
 
@@ -35,5 +59,29 @@ The routes below should all work.
 
     $app->get('/details/{id:[0-9]+}', '\App\Controller\ShopController:details');
 
-I did struggle with the error handling as I am unable to get this to work using the course code.
-Possibly Chris can help.
+    $app->any('/defaultauthed', '\App\Controller\ShopAuthedController:default');  //tuupola basic auth protected by middleware
+
+    $app->get('/detailsauthed/{id:[0-9]+}', '\App\Controller\ShopAuthedController:details');  //tuupola basic auth protected by middleware
+
+    $app->get('/notfound', 'App\Controller\NotFoundController:notfound');
+
+//    $app->group('/users', function (RouteCollectorProxy $group) {
+//        $group->get('/', \App\Action\User\UserAction::class)->setName('users');
+//        // add more routes ...
+//    })->add(UserAuthMiddleware::class);
+//    $app->get('/users', \App\Action\User\UserAction::class)->setName('users');
+//    $app->get('/login', \App\Action\Auth\LoginAction::class)->setName('login');
+//    $app->post('/login', \App\Action\Auth\LoginSubmitAction::class);
+//    $app->get('/logout', \App\Action\Auth\LogoutAction::class)->setName('logout');
+//};
+
+
+};
+Note:  https://github.com/tuupola/slim-basic-auth  (see notes on this github repo to configure slim-basic-auth)  My requirement is only to secure 2 routes per below.
+I used composer require tuupola/slim-basic-auth --ignore-platform-req=ext-http to apply basic auth as there was an issue with ext-http which I was unable to resolve.  I.e. ext-http is a xampp php.ini setting which may be depreciated.
+The routes and controllers etc. for default and details were amended below to work with basic auth.
+Note I added the middleware to secure these auths and the creds are user is admin and password is secret.
+    $app->any('/defaultauthed', '\App\Controller\ShopAuthedController:default');
+    $app->get('/detailsauthed/{id:[0-9]+}', '\App\Controller\ShopAuthedController:details');
+
+ Possibly the above application (I am a newbie at Slim) and more can be included in an update of your course to bring it online for Slim 4.
