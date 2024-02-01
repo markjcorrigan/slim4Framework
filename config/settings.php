@@ -1,5 +1,6 @@
 <?php
 
+
 // Detect environment
 $_ENV['APP_ENV'] ??= $_SERVER['APP_ENV'] ?? 'dev';
 
@@ -17,9 +18,9 @@ $configFiles = [
 $settings['db'] = [
     'driver' => 'pdo_mysql',
     'host' => 'localhost',
-    'dbname' => 'slimapp',
-    'user' => 'mysqlusername',
-    'password' => 'mysqlpassword',
+    'dbname' => $_ENV['DB_NAME'],
+    'user' => $_ENV['DB_USER'],
+    'password' => $_ENV['DB_PASS'],
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'driverOptions' => [

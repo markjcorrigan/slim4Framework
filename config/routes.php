@@ -50,17 +50,13 @@ return function (App $app) {
 
     $app->get('/notfound', 'App\Controller\NotFoundController:notfound');
 
-
-
-//    $app->group('/users', function (RouteCollectorProxy $group) {
-//        $group->get('/', \App\Action\User\UserAction::class)->setName('users');
-//        // add more routes ...
-//    })->add(UserAuthMiddleware::class);
-//    $app->get('/users', \App\Action\User\UserAction::class)->setName('users');
-//    $app->get('/login', \App\Action\Auth\LoginAction::class)->setName('login');
-//    $app->post('/login', \App\Action\Auth\LoginSubmitAction::class);
-//    $app->get('/logout', \App\Action\Auth\LogoutAction::class)->setName('logout');
-//};
-
-
+    $app->group('/users', function (RouteCollectorProxy $group) {
+  //NB this uses sessions and a password to access admin area  /users
+        $group->get('/', \App\Action\User\UserAction::class)->setName('users');
+        // add more routes ...
+    })->add(UserAuthMiddleware::class);
+    $app->get('/users', \App\Action\User\UserAction::class)->setName('users');
+    $app->get('/login', \App\Action\Auth\LoginAction::class)->setName('login');
+    $app->post('/login', \App\Action\Auth\LoginSubmitAction::class);
+    $app->get('/logout', \App\Action\Auth\LogoutAction::class)->setName('logout');
 };
